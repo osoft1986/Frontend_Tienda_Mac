@@ -1,0 +1,6 @@
+.bg-dark-transparent {
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Ajusta el último valor (0.8) para cambiar el nivel de opacidad */
+}
+
+/* Puedes agregar más estilos aquí si es necesario */

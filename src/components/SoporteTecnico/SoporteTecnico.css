@@ -1,0 +1,336 @@
+.soporte-tecnico {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: black;
+  /* Texto de los h1 en negro */
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input,
+select,
+.btn-agregar {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+}
+
+.btn-agregar {
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  color: black;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  border-top: 2px solid #007bff;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+tr:hover {
+  background-color: #e6f3ff;
+}
+
+td,
+th {
+  border-right: 1px solid #ddd;
+}
+
+td:last-child,
+th:last-child {
+  border-right: none;
+}
+
+tr:last-child td {
+  border-bottom: 2px solid #007bff;
+}
+
+.estado-container {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+}
+
+.estado {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+  border: none;
+  color: white !important;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.estado.ingreso {
+  background-color: #007bff;
+}
+
+.estado.diagnosticando {
+  background-color: #ffc107;
+}
+
+.estado.pendiente {
+  background-color: #ff0707dc;
+}
+
+.estado.reparando {
+  background-color: #6c757d;
+}
+
+.estado.reparado {
+  background-color: #17a2b8;
+}
+
+.estado.entregado {
+  background-color: #28a745;
+}
+
+.estado option {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.status-description {
+  font-size: 0.8em;
+  margin-top: 5px;
+  width: 100%;
+  max-width: 200px;
+  white-space: normal;
+}
+
+.btn-ver {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.page-number {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Image handling styles */
+.image-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.image-preview {
+  margin-bottom: 5px;
+}
+
+.image-preview img {
+  max-height: 100px;
+  max-width: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.btn-add,
+.btn-update,
+.btn-upload {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.btn-add {
+  background-color: #7f8380;
+  color: white;
+}
+
+.btn-update {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.btn-upload {
+  background-color: #17a2b8;
+  color: white;
+}
+
+/* Responsive styles */
+@media screen and (min-width: 768px) {
+  .soporte-tecnico {
+    padding: 30px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .controls {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  input,
+  select {
+    width: auto;
+  }
+
+  .btn-agregar {
+    width: auto;
+  }
+
+  table {
+    font-size: 1rem;
+  }
+
+  th,
+  td {
+    padding: 15px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .soporte-tecnico {
+    padding: 50px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .controls {
+    gap: 20px;
+  }
+}
+
+/* Styles for smaller screens */
+@media screen and (max-width: 767px) {
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    border-bottom: 1px solid #eee;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-label);
+    font-weight: bold;
+  }
+
+  .btn-ver {
+    margin-top: 10px;
+  }
+
+  /* Reset alternating colors for mobile view */
+  tr:nth-child(even),
+  tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+
+  .estado-container {
+    max-width: none;
+  }
+
+  .image-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .btn-add,
+  .btn-update,
+  .btn-upload {
+    flex: 1 0 auto;
+  }
+}

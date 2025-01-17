@@ -1,0 +1,206 @@
+/* Reset básico */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  color: #000;
+}
+
+/* Layout containers */
+.container {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  /* Usar unidades dinámicas para evitar problemas en Safari */
+  overflow: hidden;
+}
+
+/* Navegación */
+.navbar {
+  padding: 0;
+}
+
+.navbar-nav {
+  margin: 0;
+}
+
+.nav-link {
+  padding: 0.5rem 1rem;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+}
+
+/* Imágenes y contenedores de imágenes */
+.customImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  /* Asegurar que las imágenes se ajusten correctamente */
+}
+
+.card-img-container {
+  background-color: #F8F9FA;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Cards y contenido */
+.card-custom-bg {
+  background-color: #F8F9FA;
+}
+
+.card-custom-text {
+  font-size: 0.75rem;
+}
+
+.content {
+  color: white;
+  width: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Títulos y textos */
+.homeContainer h2 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+  color: #000;
+}
+
+.color-757575ff {
+  color: #757575;
+}
+
+/* Efectos y animaciones */
+.fadeIn {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+  will-change: opacity;
+  /* Optimización para Safari */
+}
+
+.fadeOut {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  will-change: opacity;
+}
+
+/* Secciones con fondo */
+.workingImageSection,
+.transparentBackground {
+  padding: 20px;
+}
+
+.workingImageSection {
+  background-color: rgba(50, 50, 50, 0.6);
+}
+
+.transparentBackground {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  .content {
+    width: 80%;
+  }
+
+  .card-img-container {
+    height: 120px;
+  }
+}
+
+@media (max-width: 992px) {
+  .content {
+    width: 90%;
+  }
+
+  .card-img-container {
+    height: 100px;
+  }
+
+  .homeContainer h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    min-height: auto;
+  }
+
+  .content {
+    width: 95%;
+    font-size: 0.9rem;
+  }
+
+  .card-img-container {
+    height: 80px;
+  }
+
+  .homeContainer h2 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .content {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .card-img-container {
+    height: 60px;
+  }
+
+  .homeContainer h2 {
+    font-size: 16px;
+  }
+}
+
+/* Ajustes específicos para iPhone 11 y 15 */
+@media screen and (min-width: 390px) and (max-width: 414px) {
+  .container {
+    min-height: calc(100vh - 56px);
+  }
+
+  .card-img-container {
+    height: 140px;
+  }
+
+  .homeContainer h2 {
+    font-size: 22px;
+  }
+}
+.imgHover {
+  transition: transform 0.3s ease;
+  /* Define la animación */
+}
+
+.imgHover:hover {
+  transform: scale(1.02);
+  /* Cambia la escala al pasar el mouse */
+}
