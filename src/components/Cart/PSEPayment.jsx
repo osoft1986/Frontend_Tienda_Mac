@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Col, Row, Alert } from 'react-bootstrap';
-import axios from 'axios';
-import styles from './PSEPayment.module.css';
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkedAlt, FaIdCard } from 'react-icons/fa';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useCart } from '../../context/CartContext';
+import React, { useState, useEffect } from "react";
+import { Form, Button, Col, Row, Alert } from "react-bootstrap";
+import axios from "axios";
+import styles from "./PSEPayment.module.css";
+import {
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkedAlt,
+  FaIdCard,
+} from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 const PSEPayment = () => {
   const location = useLocation();
@@ -14,14 +20,14 @@ const PSEPayment = () => {
   const [userId, setUserId] = useState(null);
   const [error, setError] = useState(null);
   const [customerData, setCustomerData] = useState({
-    name: '',
-    last_name: '',
-    email: '',
-    phone_number: '',
-    department: '',
-    city: '',
-    additional: '',
-    document_number: ''
+    name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    department: "",
+    city: "",
+    additional: "",
+    document_number: "",
   });
 
   useEffect(() => {
@@ -37,9 +43,9 @@ const PSEPayment = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCustomerData(prevData => ({
+    setCustomerData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -50,19 +56,19 @@ const PSEPayment = () => {
       const productId = cartItems.length > 0 ? cartItems[0].id : null;
 
       if (!productId) {
-        throw new Error('No se encontró ningún producto en el carrito');
+        throw new Error("No se encontró ningún producto en el carrito");
       }
 
       const paymentData = {
         charge: {
-          method: 'bank_account',
+          method: "bank_account",
           amount: totalAmount,
-          currency: 'COP',
-          description: 'Pago en Tienda Mac',
+          currency: "COP",
+          description: "Pago en Tienda Mac",
           customer: customerData,
-          confirm: 'false',
-          send_email: 'true',
-          redirect_url: 'https://www.tiendamac.net/payment-confirmation',
+          confirm: "false",
+          send_email: "true",
+          redirect_url: "https://www.tiendamac.net/payment-confirmation",
         },
         customer: {
           name: customerData.name,
@@ -72,26 +78,40 @@ const PSEPayment = () => {
           department: customerData.department,
           city: customerData.city,
           additional: customerData.additional,
-          document_number: customerData.document_number
+          document_number: customerData.document_number,
         },
         userId: userId,
-        productId: productId
+        productId: productId,
       };
 
-      const response = await axios.post('https://backend-tienda-mac-production.up.railway.app/api/openpay/pse-payment', paymentData);
+      const response = await axios.post(
+        "https://backend-tienda-mac-production-0992.up.railway.app/api/openpay/pse-payment",
+        paymentData
+      );
 
-      console.log('Respuesta del servidor:', response.data);
+      console.log("Respuesta del servidor:", response.data);
 
-      if (response.data && response.data.payment_method && response.data.payment_method.url) {
-        await axios.post('https://backend-tienda-mac-production.up.railway.app/update-quantity', { items: cartItems });
+      if (
+        response.data &&
+        response.data.payment_method &&
+        response.data.payment_method.url
+      ) {
+        await axios.post(
+          "https://backend-tienda-mac-production-0992.up.railway.app/update-quantity",
+          { items: cartItems }
+        );
         clearCart();
         window.location.href = response.data.payment_method.url;
       } else {
-        throw new Error('No se recibió una URL de redirección válida');
+        throw new Error("No se recibió una URL de redirección válida");
       }
     } catch (error) {
-      console.error('Error al procesar el pago:', error);
-      setError(error.response?.data?.error || error.message || 'Ocurrió un error al procesar el pago');
+      console.error("Error al procesar el pago:", error);
+      setError(
+        error.response?.data?.error ||
+          error.message ||
+          "Ocurrió un error al procesar el pago"
+      );
     }
   };
 
@@ -117,7 +137,10 @@ const PSEPayment = () => {
           </Form.Group>
         </Col>
         <Col md={6}>
-          <Form.Group controlId="formBasicLastName" className={styles.formGroup}>
+          <Form.Group
+            controlId="formBasicLastName"
+            className={styles.formGroup}
+          >
             <Form.Label className={styles.formLabel}>
               <FaUser className={styles.icon} /> Apellido
             </Form.Label>
@@ -169,7 +192,10 @@ const PSEPayment = () => {
       </Row>
       <Row>
         <Col md={6}>
-          <Form.Group controlId="formBasicDepartment" className={styles.formGroup}>
+          <Form.Group
+            controlId="formBasicDepartment"
+            className={styles.formGroup}
+          >
             <Form.Label className={styles.formLabel}>
               <FaMapMarkedAlt className={styles.icon} /> Departamento
             </Form.Label>

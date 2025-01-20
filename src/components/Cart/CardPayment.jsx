@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Col, Row } from 'react-bootstrap';
-import axios from 'axios';
-import styles from './CardPayment.module.css';
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkedAlt, FaIdCard } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
-import { useCart } from '../../context/CartContext';
+import React, { useState, useEffect } from "react";
+import { Form, Button, Col, Row } from "react-bootstrap";
+import axios from "axios";
+import styles from "./CardPayment.module.css";
+import {
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkedAlt,
+  FaIdCard,
+} from "react-icons/fa";
+import { useLocation } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 const CardPayment = () => {
   const location = useLocation();
@@ -13,16 +19,15 @@ const CardPayment = () => {
   const [userId, setUserId] = useState(null);
   const [error, setError] = useState(null);
   const [customerData, setCustomerData] = useState({
-    name: '',
-    last_name: '',
-    customer_email: '',
-    customer_phone: '',
-    customer_department: '',
-    customer_city: '',
-    customer_address: '',
-    customer_document_number: '',
+    name: "",
+    last_name: "",
+    customer_email: "",
+    customer_phone: "",
+    customer_department: "",
+    customer_city: "",
+    customer_address: "",
+    customer_document_number: "",
   });
-
 
   useEffect(() => {
     if (location.state) {
@@ -37,9 +42,9 @@ const CardPayment = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCustomerData(prevData => ({
+    setCustomerData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -50,13 +55,13 @@ const CardPayment = () => {
       const productId = cartItems.length > 0 ? cartItems[0].id : null;
 
       if (!productId) {
-        throw new Error('No se encontró ningún producto en el carrito');
+        throw new Error("No se encontró ningún producto en el carrito");
       }
       const paymentData = {
-        method: 'card',
+        method: "card",
         amount: totalAmount,
-        currency: 'COP',
-        description: 'Pago en Tienda Mac',
+        currency: "COP",
+        description: "Pago en Tienda Mac",
         customer: {
           name: customerData.name,
           last_name: customerData.last_name,
@@ -69,28 +74,40 @@ const CardPayment = () => {
           },
           document_number: customerData.customer_document_number,
         },
-        confirm: 'false',
-        send_email: 'true',
+        confirm: "false",
+        send_email: "true",
         redirect_url: `${window.location.origin}/payment-confirmation`, // URL relativa a la aplicación
         userId: userId,
-        productId: productId
+        productId: productId,
       };
 
-      const response = await axios.post('https://backend-tienda-mac-production.up.railway.app/api/openpay/create-charge', paymentData);
+      const response = await axios.post(
+        "https://backend-tienda-mac-production-0992.up.railway.app/api/openpay/create-charge",
+        paymentData
+      );
 
-      console.log('Respuesta del servidor:', response.data);
+      console.log("Respuesta del servidor:", response.data);
 
-      if (response.data && response.data.payment_method && response.data.payment_method.url) {
-        await axios.post('https://backend-tienda-mac-production.up.railway.app/update-quantity', { items: cartItems });
+      if (
+        response.data &&
+        response.data.payment_method &&
+        response.data.payment_method.url
+      ) {
+        await axios.post(
+          "https://backend-tienda-mac-production-0992.up.railway.app/update-quantity",
+          { items: cartItems }
+        );
         clearCart();
         window.location.href = response.data.payment_method.url;
       } else {
-        console.error('No se recibió una URL de redirección válida');
-        setError('Error en la respuesta del servidor. Por favor, intente nuevamente.');
+        console.error("No se recibió una URL de redirección válida");
+        setError(
+          "Error en la respuesta del servidor. Por favor, intente nuevamente."
+        );
       }
     } catch (error) {
-      console.error('Error al procesar el pago:', error);
-      setError('Error al procesar el pago. Por favor, intente nuevamente.');
+      console.error("Error al procesar el pago:", error);
+      setError("Error al procesar el pago. Por favor, intente nuevamente.");
     }
   };
 
@@ -115,7 +132,10 @@ const CardPayment = () => {
           </Form.Group>
         </Col>
         <Col md={6}>
-          <Form.Group controlId="formBasicLastName" className={styles.formGroup}>
+          <Form.Group
+            controlId="formBasicLastName"
+            className={styles.formGroup}
+          >
             <Form.Label className={styles.formLabel}>
               <FaUser className={styles.icon} /> Apellido
             </Form.Label>
@@ -167,7 +187,10 @@ const CardPayment = () => {
       </Row>
       <Row>
         <Col md={6}>
-          <Form.Group controlId="formBasicDepartment" className={styles.formGroup}>
+          <Form.Group
+            controlId="formBasicDepartment"
+            className={styles.formGroup}
+          >
             <Form.Label className={styles.formLabel}>
               <FaMapMarkedAlt className={styles.icon} /> Departamento
             </Form.Label>

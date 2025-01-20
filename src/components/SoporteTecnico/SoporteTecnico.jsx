@@ -24,7 +24,7 @@ const SoporteTecnico = () => {
     const fetchOrdenesServicio = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production.up.railway.app/soporte-Tecnico"
+          "https://backend-tienda-mac-production-0992.up.railway.app/soporte-Tecnico"
         );
         setOrdenesServicio(response.data);
         // Initialize diagnosticoDescripcion state with values from the response
@@ -91,7 +91,7 @@ const SoporteTecnico = () => {
 
       // Llamada al backend para actualizar el estado
       const response = await axios.put(
-        `https://backend-tienda-mac-production.up.railway.app/soporte-tecnico/${id}/estado`,
+        `https://backend-tienda-mac-production-0992.up.railway.app/soporte-tecnico/${id}/estado`,
         data
       );
 
@@ -141,7 +141,7 @@ const SoporteTecnico = () => {
 
     try {
       await axios.post(
-        `https://backend-tienda-mac-production.up.railway.app/soporte-tecnico/${id}/subir-imagen`,
+        `https://backend-tienda-mac-production-0992.up.railway.app/soporte-tecnico/${id}/subir-imagen`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

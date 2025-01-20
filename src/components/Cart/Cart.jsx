@@ -1,41 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { useCart } from '../../context/CartContext';
-import Navbar from '../NavBar/NavBar';
-import Footer from '../Footer/Footer';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button, Container, Row, Col, Image, Card } from 'react-bootstrap';
-import { Trash, Dash, Plus, Cart as CartIcon, CreditCard } from 'react-bootstrap-icons';
-import axios from 'axios';
-import LoginUser from '../Login/LoginUser';
-import styles from './Cart.module.css';
+import React, { useState, useEffect } from "react";
+import { useCart } from "../../context/CartContext";
+import Navbar from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Container, Row, Col, Image, Card } from "react-bootstrap";
+import {
+  Trash,
+  Dash,
+  Plus,
+  Cart as CartIcon,
+  CreditCard,
+} from "react-bootstrap-icons";
+import axios from "axios";
+import LoginUser from "../Login/LoginUser";
+import styles from "./Cart.module.css";
 
 const Cart = () => {
-  const { cartItems, removeFromCart, clearCart, increaseQuantity, decreaseQuantity, updateQuantity } = useCart();
+  const {
+    cartItems,
+    removeFromCart,
+    clearCart,
+    increaseQuantity,
+    decreaseQuantity,
+    updateQuantity,
+  } = useCart();
   const [productImages, setProductImages] = useState({});
   const [productQuantities, setProductQuantities] = useState({});
   const [showLoginUser, setShowLoginUser] = useState(false);
   const [user, setUser] = useState(null);
-  const [redirectAfterLogin, setRedirectAfterLogin] = useState('/cart');
+  const [redirectAfterLogin, setRedirectAfterLogin] = useState("/cart");
   const navigate = useNavigate();
 
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(price);
+    return new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+    }).format(price);
   };
 
   const handleProceedToPayment = () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
-      const user = JSON.parse(localStorage.getItem('user'));
-      navigate('/payment-methods', { 
-        state: { 
+      const user = JSON.parse(localStorage.getItem("user"));
+      navigate("/payment-methods", {
+        state: {
           totalAmount: totalPrice,
-          userId: user ? user.id : null
-        } 
+          userId: user ? user.id : null,
+        },
       });
     } else {
-      setRedirectAfterLogin('/cart');
+      setRedirectAfterLogin("/cart");
       setShowLoginUser(true);
     }
   };
@@ -49,9 +68,16 @@ const Cart = () => {
   const fetchProductImages = async (products, setImageState) => {
     const imageFetchPromises = products.map(async (product) => {
       try {
-        const imageResponse = await axios.get(`https://backend-tienda-mac-production.up.railway.app/products/${product.id}/images`);
-        const base64Images = imageResponse.data.map(image => `data:image/jpeg;base64,${image.data}`);
-        setImageState(prevState => ({ ...prevState, [product.id]: base64Images }));
+        const imageResponse = await axios.get(
+          `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+        );
+        const base64Images = imageResponse.data.map(
+          (image) => `data:image/jpeg;base64,${image.data}`
+        );
+        setImageState((prevState) => ({
+          ...prevState,
+          [product.id]: base64Images,
+        }));
       } catch (error) {
         console.error(`Error getting images for product ${product.id}:`, error);
       }
@@ -67,8 +93,10 @@ const Cart = () => {
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const detailsPromises = cartItems.map(item =>
-          axios.get(`https://backend-tienda-mac-production.up.railway.app/product/${item.id}`)
+        const detailsPromises = cartItems.map((item) =>
+          axios.get(
+            `https://backend-tienda-mac-production-0992.up.railway.app/product/${item.id}`
+          )
         );
         const responses = await Promise.all(detailsPromises);
         const quantities = responses.reduce((acc, response) => {
@@ -77,7 +105,7 @@ const Cart = () => {
         }, {});
         setProductQuantities(quantities);
       } catch (error) {
-        console.error('Error fetching product details:', error);
+        console.error("Error fetching product details:", error);
       }
     };
 
@@ -85,7 +113,7 @@ const Cart = () => {
   }, [cartItems]);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
@@ -102,9 +130,9 @@ const Cart = () => {
     return (
       <div>
         <Navbar />
-        <LoginUser 
-          onLoginSuccess={handleLoginSuccess} 
-          onClose={() => setShowLoginUser(false)} 
+        <LoginUser
+          onLoginSuccess={handleLoginSuccess}
+          onClose={() => setShowLoginUser(false)}
         />
         <Footer />
       </div>
@@ -112,7 +140,7 @@ const Cart = () => {
   }
 
   return (
-    <div className={styles.cartPage} style={{ paddingTop: '60px' }}>
+    <div className={styles.cartPage} style={{ paddingTop: "60px" }}>
       <Navbar />
       <Container className={`my-5 ${styles.cartContainer}`}>
         <h2 className={`${styles.cartTitle} text-center mb-4`}>
@@ -137,9 +165,9 @@ const Cart = () => {
                       {productImages[item.id] && productImages[item.id][0] ? (
                         <Image
                           src={productImages[item.id][0]}
-                          alt={item.name} 
-                          className={styles.cartItemImage} 
-                          fluid 
+                          alt={item.name}
+                          className={styles.cartItemImage}
+                          fluid
                         />
                       ) : (
                         <div className="text-center p-3">
@@ -149,35 +177,55 @@ const Cart = () => {
                     </Col>
                     <Col xs={12} md={4}>
                       <h5 className="mb-2">{item.name}</h5>
-                      <p className="text-muted mb-0">Precio unitario: {formatPrice(item.price)}</p>
+                      <p className="text-muted mb-0">
+                        Precio unitario: {formatPrice(item.price)}
+                      </p>
                     </Col>
                     <Col xs={12} md={2} className="my-3 my-md-0">
                       <div className="d-flex align-items-center justify-content-center">
-                        <Button 
-                          variant="outline-secondary" 
-                          size="sm" 
-                          onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
+                        <Button
+                          variant="outline-secondary"
+                          size="sm"
+                          onClick={() =>
+                            handleQuantityChange(item.id, item.quantity - 1)
+                          }
                           disabled={item.quantity <= 1}
                         >
                           <Dash />
                         </Button>
-                        <span className={`mx-3 ${styles.quantity}`}>{item.quantity}</span>
-                        <Button 
-                          variant="outline-secondary" 
-                          size="sm" 
-                          onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                          disabled={item.quantity >= (productQuantities[item.id] || 1)}
+                        <span className={`mx-3 ${styles.quantity}`}>
+                          {item.quantity}
+                        </span>
+                        <Button
+                          variant="outline-secondary"
+                          size="sm"
+                          onClick={() =>
+                            handleQuantityChange(item.id, item.quantity + 1)
+                          }
+                          disabled={
+                            item.quantity >= (productQuantities[item.id] || 1)
+                          }
                         >
                           <Plus />
                         </Button>
                       </div>
-                      <p className="text-muted mt-2 mb-0">Disponibles: {productQuantities[item.id] || 'Cargando...'}</p>
+                      <p className="text-muted mt-2 mb-0">
+                        Disponibles:{" "}
+                        {productQuantities[item.id] || "Cargando..."}
+                      </p>
                     </Col>
                     <Col xs={6} md={2} className="text-right">
-                      <h5 className="mb-0">{formatPrice(item.price * item.quantity)}</h5>
+                      <h5 className="mb-0">
+                        {formatPrice(item.price * item.quantity)}
+                      </h5>
                     </Col>
                     <Col xs={6} md={1} className="text-right">
-                      <Button variant="danger" size="sm" onClick={() => removeFromCart(item.id)} className={styles.removeBtn}>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => removeFromCart(item.id)}
+                        className={styles.removeBtn}
+                      >
                         <Trash />
                       </Button>
                     </Col>
@@ -192,7 +240,12 @@ const Cart = () => {
               </Card.Body>
             </Card>
             <div className="d-flex justify-content-center">
-              <Button variant="primary" size="lg" onClick={handleProceedToPayment} disabled={cartItems.length === 0}>
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={handleProceedToPayment}
+                disabled={cartItems.length === 0}
+              >
                 <CreditCard className="me-2" /> Proceder al Pago
               </Button>
             </div>

@@ -52,7 +52,8 @@ const SoporteTecnicoDetalle = () => {
   const [retryCount, setRetryCount] = useState(0);
   const navigate = useNavigate();
 
-  const API_BASE_URL = "https://backend-tienda-mac-production.up.railway.app";
+  const API_BASE_URL =
+    "https://backend-tienda-mac-production-0992.up.railway.app";
   const MAX_RETRIES = 3;
 
   const estados = [

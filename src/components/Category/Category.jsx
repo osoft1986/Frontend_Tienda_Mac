@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import MenuDashboard from '../MenuDashboard/MenuDashboard';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import MenuDashboard from "../MenuDashboard/MenuDashboard";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     editingCategoryId: null,
-    name: '',
-    description: '',
+    name: "",
+    description: "",
   });
   const [showForm, setShowForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,10 +18,12 @@ const Categories = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://backend-tienda-mac-production.up.railway.app/getAllCategories');
+        const response = await axios.get(
+          "https://backend-tienda-mac-production-0992.up.railway.app/getAllCategories"
+        );
         setCategories(response.data);
       } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error("Error fetching categories:", error);
       }
     };
 
@@ -39,23 +41,35 @@ const Categories = () => {
     e.preventDefault();
     try {
       if (formData.editingCategoryId) {
-        const response = await axios.put(`https://backend-tienda-mac-production.up.railway.app/updateCategory/${formData.editingCategoryId}`, formData);
-        setCategories(categories.map(cat => (cat.id === formData.editingCategoryId ? response.data : cat)));
-        alert('Categoría actualizada con éxito');
+        const response = await axios.put(
+          `https://backend-tienda-mac-production-0992.up.railway.app/updateCategory/${formData.editingCategoryId}`,
+          formData
+        );
+        setCategories(
+          categories.map((cat) =>
+            cat.id === formData.editingCategoryId ? response.data : cat
+          )
+        );
+        alert("Categoría actualizada con éxito");
       } else {
-        const response = await axios.post('https://backend-tienda-mac-production.up.railway.app/createCategory', formData);
+        const response = await axios.post(
+          "https://backend-tienda-mac-production-0992.up.railway.app/createCategory",
+          formData
+        );
         setCategories([...categories, response.data]);
-        alert('Categoría creada con éxito');
+        alert("Categoría creada con éxito");
       }
       setFormData({
         editingCategoryId: null,
-        name: '',
-        description: '',
+        name: "",
+        description: "",
       });
       setShowForm(false);
     } catch (error) {
-      console.error('Error al guardar la categoría:', error);
-      alert('Ocurrió un error al procesar la categoría. Verifica los datos ingresados.');
+      console.error("Error al guardar la categoría:", error);
+      alert(
+        "Ocurrió un error al procesar la categoría. Verifica los datos ingresados."
+      );
     }
   };
 
@@ -70,19 +84,24 @@ const Categories = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://backend-tienda-mac-production.up.railway.app/deleteCategory/${id}`);
-      setCategories(categories.filter(cat => cat.id !== id));
-      alert('Categoría eliminada con éxito');
+      await axios.delete(
+        `https://backend-tienda-mac-production-0992.up.railway.app/deleteCategory/${id}`
+      );
+      setCategories(categories.filter((cat) => cat.id !== id));
+      alert("Categoría eliminada con éxito");
     } catch (error) {
-      console.error('Error al eliminar la categoría:', error);
-      alert('No se pudo eliminar la categoría. Inténtalo de nuevo.');
+      console.error("Error al eliminar la categoría:", error);
+      alert("No se pudo eliminar la categoría. Inténtalo de nuevo.");
     }
   };
 
   // Paginación
   const indexOfLastCategory = currentPage * categoriesPerPage;
   const indexOfFirstCategory = indexOfLastCategory - categoriesPerPage;
-  const currentCategories = categories.slice(indexOfFirstCategory, indexOfLastCategory);
+  const currentCategories = categories.slice(
+    indexOfFirstCategory,
+    indexOfLastCategory
+  );
   const totalPages = Math.ceil(categories.length / categoriesPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -94,17 +113,27 @@ const Categories = () => {
         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-3">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Categorías</h1>
-            <button className="btn btn-success" onClick={() => setShowForm(!showForm)}>
-              <FontAwesomeIcon icon={faPlus} /> {showForm ? 'Cerrar Formulario' : 'Agregar Categoría'}
+            <button
+              className="btn btn-success"
+              onClick={() => setShowForm(!showForm)}
+            >
+              <FontAwesomeIcon icon={faPlus} />{" "}
+              {showForm ? "Cerrar Formulario" : "Agregar Categoría"}
             </button>
           </div>
           {showForm && (
             <div className="card mb-3 shadow">
               <div className="card-body">
-                <h5 className="card-title">{formData.editingCategoryId ? 'Editar Categoría' : 'Agregar Categoría'}</h5>
+                <h5 className="card-title">
+                  {formData.editingCategoryId
+                    ? "Editar Categoría"
+                    : "Agregar Categoría"}
+                </h5>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Nombre:</label>
+                    <label htmlFor="name" className="form-label">
+                      Nombre:
+                    </label>
                     <input
                       type="text"
                       id="name"
@@ -117,7 +146,9 @@ const Categories = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="description" className="form-label">Descripción:</label>
+                    <label htmlFor="description" className="form-label">
+                      Descripción:
+                    </label>
                     <textarea
                       id="description"
                       name="description"
@@ -129,7 +160,9 @@ const Categories = () => {
                     />
                   </div>
                   <button type="submit" className="btn btn-primary">
-                    {formData.editingCategoryId ? 'Actualizar Categoría' : 'Agregar Categoría'}
+                    {formData.editingCategoryId
+                      ? "Actualizar Categoría"
+                      : "Agregar Categoría"}
                   </button>
                 </form>
               </div>
@@ -147,16 +180,22 @@ const Categories = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentCategories.map(category => (
+                    {currentCategories.map((category) => (
                       <tr key={category.id}>
                         <td>{category.name}</td>
                         <td>{category.description}</td>
                         <td>
                           <div className="btn-group" role="group">
-                            <button className="btn btn-outline-primary btn-sm" onClick={() => handleEdit(category)}>
+                            <button
+                              className="btn btn-outline-primary btn-sm"
+                              onClick={() => handleEdit(category)}
+                            >
                               <FontAwesomeIcon icon={faEdit} />
                             </button>
-                            <button className="btn btn-outline-danger btn-sm" onClick={() => handleDelete(category.id)}>
+                            <button
+                              className="btn btn-outline-danger btn-sm"
+                              onClick={() => handleDelete(category.id)}
+                            >
                               <FontAwesomeIcon icon={faTrashAlt} />
                             </button>
                           </div>
@@ -169,12 +208,22 @@ const Categories = () => {
             </div>
             <div className="card-footer bg-light">
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <small className="text-muted mb-2 mb-md-0">Página {currentPage} de {totalPages}</small>
+                <small className="text-muted mb-2 mb-md-0">
+                  Página {currentPage} de {totalPages}
+                </small>
                 <nav aria-label="Category pagination">
                   <ul className="pagination pagination-sm m-0 justify-content-center">
-                    {[...Array(totalPages).keys()].map(page => (
-                      <li key={page} className={`page-item ${currentPage === page + 1 ? 'active' : ''}`}>
-                        <button className="page-link" onClick={() => paginate(page + 1)}>
+                    {[...Array(totalPages).keys()].map((page) => (
+                      <li
+                        key={page}
+                        className={`page-item ${
+                          currentPage === page + 1 ? "active" : ""
+                        }`}
+                      >
+                        <button
+                          className="page-link"
+                          onClick={() => paginate(page + 1)}
+                        >
                           {page + 1}
                         </button>
                       </li>

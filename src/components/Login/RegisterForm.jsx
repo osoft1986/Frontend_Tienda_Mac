@@ -1,26 +1,26 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './RegisterForm.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./RegisterForm.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const RegisterForm = ({ onClose }) => {
   const navigate = useNavigate();
   const formRef = useRef(null);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [documentNumber, setDocumentNumber] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
-  const [zipCode, setZipCode] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [documentNumber, setDocumentNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -28,49 +28,52 @@ const RegisterForm = ({ onClose }) => {
         onClose();
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [onClose]);
 
   const handleLoginClick = () => {
-    navigate('/LoginUser');
+    navigate("/LoginUser");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccessMessage('');
+    setError("");
+    setSuccessMessage("");
     try {
-      const response = await axios.post('https://backend-tienda-mac-production.up.railway.app/auth/register', {
-        firstName,
-        lastName,
-        email,
-        password,
-        documentNumber,
-        phoneNumber,
-        address,
-        city,
-        country,
-        zipCode
-      });
-      if (response.data.msg === 'Registro exitoso') {
-        console.log('Registro exitoso');
-        setSuccessMessage('Te has registrado exitosamente en Tienda Mac');
-        
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        
+      const response = await axios.post(
+        "https://backend-tienda-mac-production-0992.up.railway.app/auth/register",
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+          documentNumber,
+          phoneNumber,
+          address,
+          city,
+          country,
+          zipCode,
+        }
+      );
+      if (response.data.msg === "Registro exitoso") {
+        console.log("Registro exitoso");
+        setSuccessMessage("Te has registrado exitosamente en Tienda Mac");
+
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+
         setTimeout(() => {
-          navigate('/home');
+          navigate("/home");
         }, 2000);
       } else {
-        setError('Error en el registro. Por favor, inténtelo de nuevo.');
+        setError("Error en el registro. Por favor, inténtelo de nuevo.");
       }
     } catch (error) {
       console.error(error.message);
-      setError('Error del servidor. Por favor, inténtelo de nuevo.');
+      setError("Error del servidor. Por favor, inténtelo de nuevo.");
     }
   };
 
@@ -82,7 +85,9 @@ const RegisterForm = ({ onClose }) => {
         </button>
         <h2 className="unique-h2">Registro de Usuario</h2>
         {error && <p className="unique-error-message">{error}</p>}
-        {successMessage && <p className="unique-success-message">{successMessage}</p>}
+        {successMessage && (
+          <p className="unique-success-message">{successMessage}</p>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-4 unique-form-group">
@@ -214,7 +219,9 @@ const RegisterForm = ({ onClose }) => {
               </button>
             </div>
           </div>
-          <button type="submit" className="unique-btn-primary">Registrarse</button>
+          <button type="submit" className="unique-btn-primary">
+            Registrarse
+          </button>
         </form>
         <p className="unique-login-link" onClick={handleLoginClick}>
           ¿Ya tienes cuenta? Inicia sesión aquí.

@@ -1,30 +1,36 @@
-import React, { useState } from 'react';
-import { Form, Button, Col, Row } from 'react-bootstrap';
-import axios from 'axios';
-import styles from './PayoutsPayment.module.css';
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkedAlt, FaIdCard } from 'react-icons/fa';
-import { useCart } from '../../context/CartContext'; // Importar el contexto del carrito
+import React, { useState } from "react";
+import { Form, Button, Col, Row } from "react-bootstrap";
+import axios from "axios";
+import styles from "./PayoutsPayment.module.css";
+import {
+  FaUser,
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkedAlt,
+  FaIdCard,
+} from "react-icons/fa";
+import { useCart } from "../../context/CartContext"; // Importar el contexto del carrito
 
 const PayoutsPayment = ({ totalAmount }) => {
   const { clearCart } = useCart(); // Obtener la función clearCart del contexto
   const [customerData, setCustomerData] = useState({
-    name: '',
-    last_name: '',
-    email: '',
-    phone_number: '',
-    department: '',
-    city: '',
-    additional: '',
-    document_number: ''
+    name: "",
+    last_name: "",
+    email: "",
+    phone_number: "",
+    department: "",
+    city: "",
+    additional: "",
+    document_number: "",
   });
 
-  const [receiptUrl, setReceiptUrl] = useState('');
+  const [receiptUrl, setReceiptUrl] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCustomerData(prevData => ({
+    setCustomerData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -35,14 +41,17 @@ const PayoutsPayment = ({ totalAmount }) => {
         customer: customerData,
         charge: {
           amount: totalAmount,
-          description: 'COMPRA EN TIENDA MAC',
+          description: "COMPRA EN TIENDA MAC",
           iva: 0, // Si aplicable, ajusta el IVA aquí
         },
       };
 
-      const response = await axios.post('https://backend-tienda-mac-production.up.railway.app/api/openpay/store-payment', paymentData);
+      const response = await axios.post(
+        "https://backend-tienda-mac-production-0992.up.railway.app/api/openpay/store-payment",
+        paymentData
+      );
 
-      console.log('Respuesta del servidor:', response.data);
+      console.log("Respuesta del servidor:", response.data);
 
       if (response.data && response.data.receipt_url) {
         setReceiptUrl(response.data.receipt_url);
@@ -51,10 +60,10 @@ const PayoutsPayment = ({ totalAmount }) => {
         // Redirigir al usuario
         window.location.href = response.data.receipt_url;
       } else {
-        console.error('No se recibió una URL de recibo válida');
+        console.error("No se recibió una URL de recibo válida");
       }
     } catch (error) {
-      console.error('Error al procesar el pago:', error);
+      console.error("Error al procesar el pago:", error);
     }
   };
 
@@ -79,7 +88,10 @@ const PayoutsPayment = ({ totalAmount }) => {
             </Form.Group>
           </Col>
           <Col md={6}>
-            <Form.Group controlId="formBasicLastName" className={styles.formGroup}>
+            <Form.Group
+              controlId="formBasicLastName"
+              className={styles.formGroup}
+            >
               <Form.Label className={styles.formLabel}>
                 <FaUser className={styles.icon} /> Apellido
               </Form.Label>
@@ -128,7 +140,10 @@ const PayoutsPayment = ({ totalAmount }) => {
         </Row>
         <Row>
           <Col md={6}>
-            <Form.Group controlId="formBasicDepartment" className={styles.formGroup}>
+            <Form.Group
+              controlId="formBasicDepartment"
+              className={styles.formGroup}
+            >
               <Form.Label className={styles.formLabel}>
                 <FaMapMarkedAlt className={styles.icon} /> Departamento
               </Form.Label>
@@ -158,7 +173,10 @@ const PayoutsPayment = ({ totalAmount }) => {
             </Form.Group>
           </Col>
         </Row>
-        <Form.Group controlId="formBasicAdditional" className={styles.formGroup}>
+        <Form.Group
+          controlId="formBasicAdditional"
+          className={styles.formGroup}
+        >
           <Form.Label className={styles.formLabel}>
             <FaMapMarkedAlt className={styles.icon} /> Dirección Adicional
           </Form.Label>
@@ -171,7 +189,10 @@ const PayoutsPayment = ({ totalAmount }) => {
             className={styles.formControl}
           />
         </Form.Group>
-        <Form.Group controlId="formBasicDocumentNumber" className={styles.formGroup}>
+        <Form.Group
+          controlId="formBasicDocumentNumber"
+          className={styles.formGroup}
+        >
           <Form.Label className={styles.formLabel}>
             <FaIdCard className={styles.icon} /> Número de Documento
           </Form.Label>
@@ -185,7 +206,11 @@ const PayoutsPayment = ({ totalAmount }) => {
           />
         </Form.Group>
         <div className={styles.buttonContainer}>
-          <Button variant="primary" type="submit" className={styles.submitButton}>
+          <Button
+            variant="primary"
+            type="submit"
+            className={styles.submitButton}
+          >
             Pagar con Payouts
           </Button>
         </div>

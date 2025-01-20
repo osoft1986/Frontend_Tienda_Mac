@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import MenuDashboard from '../MenuDashboard/MenuDashboard';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import MenuDashboard from "../MenuDashboard/MenuDashboard";
 
 const Brands = () => {
   const [brands, setBrands] = useState([]);
   const [formData, setFormData] = useState({
     id: null,
-    name: '',
-    image: '',
+    name: "",
+    image: "",
   });
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -19,10 +19,12 @@ const Brands = () => {
   useEffect(() => {
     const fetchBrands = async () => {
       try {
-        const response = await axios.get('https://backend-tienda-mac-production.up.railway.app/getAllBrands');
+        const response = await axios.get(
+          "https://backend-tienda-mac-production-0992.up.railway.app/getAllBrands"
+        );
         setBrands(response.data);
       } catch (error) {
-        console.error('Error fetching brands:', error);
+        console.error("Error fetching brands:", error);
       }
     };
 
@@ -38,25 +40,31 @@ const Brands = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const method = isUpdateMode ? 'put' : 'post';
-    const url = isUpdateMode ? `https://backend-tienda-mac-production.up.railway.app/updateBrand/${formData.id}` : 'https://backend-tienda-mac-production.up.railway.app/createBrand';
+    const method = isUpdateMode ? "put" : "post";
+    const url = isUpdateMode
+      ? `https://backend-tienda-mac-production-0992.up.railway.app/updateBrand/${formData.id}`
+      : "https://backend-tienda-mac-production-0992.up.railway.app/createBrand";
 
     try {
       const response = await axios[method](url, formData);
-      if (method === 'post') {
+      if (method === "post") {
         setBrands([...brands, response.data]);
       } else {
-        setBrands(brands.map(brand => (brand.id === formData.id ? response.data : brand)));
+        setBrands(
+          brands.map((brand) =>
+            brand.id === formData.id ? response.data : brand
+          )
+        );
       }
       setShowForm(false);
       setFormData({
         id: null,
-        name: '',
-        image: '',
+        name: "",
+        image: "",
       });
       setIsUpdateMode(false);
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -72,10 +80,12 @@ const Brands = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://backend-tienda-mac-production.up.railway.app/deleteBrand/${id}`);
-      setBrands(brands.filter(brand => brand.id !== id));
+      await axios.delete(
+        `https://backend-tienda-mac-production-0992.up.railway.app/deleteBrand/${id}`
+      );
+      setBrands(brands.filter((brand) => brand.id !== id));
     } catch (error) {
-      console.error('Error deleting brand:', error);
+      console.error("Error deleting brand:", error);
     }
   };
 
@@ -93,17 +103,25 @@ const Brands = () => {
         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-3">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Marcas</h1>
-            <button className="btn btn-success" onClick={() => setShowForm(!showForm)}>
-              <FontAwesomeIcon icon={faPlus} /> {showForm ? 'Cerrar Formulario' : 'Agregar Marca'}
+            <button
+              className="btn btn-success"
+              onClick={() => setShowForm(!showForm)}
+            >
+              <FontAwesomeIcon icon={faPlus} />{" "}
+              {showForm ? "Cerrar Formulario" : "Agregar Marca"}
             </button>
           </div>
           {showForm && (
             <div className="card mb-3 shadow">
               <div className="card-body">
-                <h5 className="card-title">{isUpdateMode ? 'Editar Marca' : 'Agregar Marca'}</h5>
+                <h5 className="card-title">
+                  {isUpdateMode ? "Editar Marca" : "Agregar Marca"}
+                </h5>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Nombre:</label>
+                    <label htmlFor="name" className="form-label">
+                      Nombre:
+                    </label>
                     <input
                       type="text"
                       id="name"
@@ -116,7 +134,9 @@ const Brands = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="image" className="form-label">Imagen:</label>
+                    <label htmlFor="image" className="form-label">
+                      Imagen:
+                    </label>
                     <input
                       type="text"
                       id="image"
@@ -129,7 +149,7 @@ const Brands = () => {
                     />
                   </div>
                   <button type="submit" className="btn btn-primary">
-                    {isUpdateMode ? 'Actualizar Marca' : 'Agregar Marca'}
+                    {isUpdateMode ? "Actualizar Marca" : "Agregar Marca"}
                   </button>
                 </form>
               </div>
@@ -147,7 +167,7 @@ const Brands = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentBrands.map(brand => (
+                    {currentBrands.map((brand) => (
                       <tr key={brand.id}>
                         <td>{brand.name}</td>
                         <td>
@@ -155,10 +175,16 @@ const Brands = () => {
                         </td>
                         <td>
                           <div className="btn-group" role="group">
-                            <button className="btn btn-outline-primary btn-sm" onClick={() => handleEdit(brand)}>
+                            <button
+                              className="btn btn-outline-primary btn-sm"
+                              onClick={() => handleEdit(brand)}
+                            >
                               <FontAwesomeIcon icon={faEdit} />
                             </button>
-                            <button className="btn btn-outline-danger btn-sm" onClick={() => handleDelete(brand.id)}>
+                            <button
+                              className="btn btn-outline-danger btn-sm"
+                              onClick={() => handleDelete(brand.id)}
+                            >
                               <FontAwesomeIcon icon={faTrashAlt} />
                             </button>
                           </div>
@@ -171,12 +197,22 @@ const Brands = () => {
             </div>
             <div className="card-footer bg-light">
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <small className="text-muted mb-2 mb-md-0">Página {currentPage} de {totalPages}</small>
+                <small className="text-muted mb-2 mb-md-0">
+                  Página {currentPage} de {totalPages}
+                </small>
                 <nav aria-label="Brands pagination">
                   <ul className="pagination pagination-sm m-0 justify-content-center">
-                    {[...Array(totalPages).keys()].map(page => (
-                      <li key={page} className={`page-item ${currentPage === page + 1 ? 'active' : ''}`}>
-                        <button className="page-link" onClick={() => paginate(page + 1)}>
+                    {[...Array(totalPages).keys()].map((page) => (
+                      <li
+                        key={page}
+                        className={`page-item ${
+                          currentPage === page + 1 ? "active" : ""
+                        }`}
+                      >
+                        <button
+                          className="page-link"
+                          onClick={() => paginate(page + 1)}
+                        >
                           {page + 1}
                         </button>
                       </li>

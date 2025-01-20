@@ -1,17 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './LoginUser.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./LoginUser.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const LoginUser = ({ onClose, onLoginSuccess }) => {
   const navigate = useNavigate();
   const formRef = useRef(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -20,56 +20,68 @@ const LoginUser = ({ onClose, onLoginSuccess }) => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [onClose]);
 
   const handleRegisterClick = () => {
-    navigate('/register');
+    navigate("/register");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!email || !password) {
-      setError('Por favor, complete todos los campos.');
+      setError("Por favor, complete todos los campos.");
       return;
     }
 
     try {
-      const response = await axios.post('https://backend-tienda-mac-production.up.railway.app/auth/LoginUser', {
-        email,
-        password
-      });
+      const response = await axios.post(
+        "https://backend-tienda-mac-production-0992.up.railway.app/auth/LoginUser",
+        {
+          email,
+          password,
+        }
+      );
 
-      console.log('Respuesta del servidor:', response);
+      console.log("Respuesta del servidor:", response);
 
       if (response.status === 200 && response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        console.log('Inicio de sesión exitoso');
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        console.log("Inicio de sesión exitoso");
         onLoginSuccess(response.data.user);
         onClose();
-        navigate('/home');
+        navigate("/home");
       } else {
-        console.log('Respuesta sin token:', response.data);
-        setError('Respuesta inesperada del servidor. Por favor, intente de nuevo.');
+        console.log("Respuesta sin token:", response.data);
+        setError(
+          "Respuesta inesperada del servidor. Por favor, intente de nuevo."
+        );
       }
     } catch (error) {
-      console.error('Error completo:', error);
+      console.error("Error completo:", error);
       if (error.response) {
-        console.error('Datos de la respuesta de error:', error.response.data);
-        console.error('Estado de la respuesta de error:', error.response.status);
-        setError(`Error del servidor: ${error.response.data.msg || 'Intente de nuevo.'}`);
+        console.error("Datos de la respuesta de error:", error.response.data);
+        console.error(
+          "Estado de la respuesta de error:",
+          error.response.status
+        );
+        setError(
+          `Error del servidor: ${
+            error.response.data.msg || "Intente de nuevo."
+          }`
+        );
       } else if (error.request) {
-        console.error('Error de solicitud:', error.request);
-        setError('No se pudo conectar con el servidor. Verifique su conexión.');
+        console.error("Error de solicitud:", error.request);
+        setError("No se pudo conectar con el servidor. Verifique su conexión.");
       } else {
-        console.error('Error:', error.message);
-        setError('Error al iniciar sesión. Por favor, intente de nuevo.');
+        console.error("Error:", error.message);
+        setError("Error al iniciar sesión. Por favor, intente de nuevo.");
       }
     }
   };
@@ -114,7 +126,9 @@ const LoginUser = ({ onClose, onLoginSuccess }) => {
               </button>
             </div>
           </div>
-          <button type="submit" className="unique-btn-primary">Iniciar sesión</button>
+          <button type="submit" className="unique-btn-primary">
+            Iniciar sesión
+          </button>
         </form>
         <p className="unique-register-link" onClick={handleRegisterClick}>
           ¿No tienes cuenta? Regístrate aquí.

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Navbar from '../../NavBar/NavBar';
-import { Link } from 'react-router-dom';
-import Footer from '../../Footer/Footer';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Navbar from "../../NavBar/NavBar";
+import { Link } from "react-router-dom";
+import Footer from "../../Footer/Footer";
 
 const AirpodsUsed = () => {
   const [AirpodsProducts, setAirpodsProducts] = useState([]);
@@ -12,39 +12,57 @@ const AirpodsUsed = () => {
     const fetchAirpodsProducts = async () => {
       try {
         const responses = await Promise.all([
-          axios.get('https://backend-tienda-mac-production.up.railway.app/products/category/Audifonos/subcategory/Auriculares/name/AirPods%20Pro%20(2.ª generación)%20con%20estuche%20MagSafe%20(USB-C)')
+          axios.get(
+            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Audifonos/subcategory/Auriculares/name/AirPods%20Pro%20(2.ª generación)%20con%20estuche%20MagSafe%20(USB-C)"
+          ),
         ]);
-        const products = responses.flatMap(response => response.data);
+        const products = responses.flatMap((response) => response.data);
         setAirpodsProducts(products);
         products.forEach(async (product) => {
           try {
-            const imageResponse = await axios.get(`https://backend-tienda-mac-production.up.railway.app/products/${product.id}/images`);
+            const imageResponse = await axios.get(
+              `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+            );
             const imageFileNames = imageResponse.data;
-            const imageUrls = imageFileNames.map(fileName => `https://backend-tienda-mac-production.up.railway.app/images/${fileName}`);
-            setProductImages(prevState => ({ ...prevState, [product.id]: imageUrls }));
+            const imageUrls = imageFileNames.map(
+              (fileName) =>
+                `https://backend-tienda-mac-production-0992.up.railway.app/images/${fileName}`
+            );
+            setProductImages((prevState) => ({
+              ...prevState,
+              [product.id]: imageUrls,
+            }));
           } catch (error) {
-            console.error(`Error getting images for product ${product.id}:`, error);
+            console.error(
+              `Error getting images for product ${product.id}:`,
+              error
+            );
           }
         });
       } catch (error) {
-        console.error('Error fetching Airpods products:', error);
+        console.error("Error fetching Airpods products:", error);
       }
     };
     fetchAirpodsProducts();
   }, []);
 
-
-
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(price);
+    return new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+    }).format(price);
   };
 
   return (
     <div className="Airpods-products">
       <Navbar />
       <div className="container py-5">
-        <h1 className="text-center mb-4 fs-4" style={{ color: 'black' }}>Airpods Usados</h1>
-        <h2 className="text-center mb-4 fs-4" style={{ color: 'black' }}>Productos no disponibles en el momento</h2>
+        <h1 className="text-center mb-4 fs-4" style={{ color: "black" }}>
+          Airpods Usados
+        </h1>
+        <h2 className="text-center mb-4 fs-4" style={{ color: "black" }}>
+          Productos no disponibles en el momento
+        </h2>
         {/* <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {AirpodsProducts.map((product) => (
             <div className="col" key={product.id}>
@@ -76,5 +94,3 @@ const AirpodsUsed = () => {
 };
 
 export default AirpodsUsed;
-
-

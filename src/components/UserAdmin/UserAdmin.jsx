@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import MenuDashboard from '../MenuDashboard/MenuDashboard';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import MenuDashboard from "../MenuDashboard/MenuDashboard";
 
 const UserAdminManagement = () => {
   const [users, setUsers] = useState([]);
-  const [formData, setFormData] = useState({ id: null, email: '', password: '', role: '' });
+  const [formData, setFormData] = useState({
+    id: null,
+    email: "",
+    password: "",
+    role: "",
+  });
   const [formError, setFormError] = useState({});
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -16,10 +21,12 @@ const UserAdminManagement = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await axios.get('https://backend-tienda-mac-production.up.railway.app/getAllUserAdmins');
+        const response = await axios.get(
+          "https://backend-tienda-mac-production-0992.up.railway.app/getAllUserAdmins"
+        );
         setUsers(response.data);
       } catch (error) {
-        console.error('Error al obtener los usuarios administradores:', error);
+        console.error("Error al obtener los usuarios administradores:", error);
       }
     };
     getUsers();
@@ -30,30 +37,43 @@ const UserAdminManagement = () => {
   };
 
   const handleEdit = (user) => {
-    setFormData({ id: user.id, email: user.email, password: user.password, role: user.role });
+    setFormData({
+      id: user.id,
+      email: user.email,
+      password: user.password,
+      role: user.role,
+    });
     setIsUpdateMode(true);
     setShowForm(true);
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://backend-tienda-mac-production.up.railway.app/deleteUserAdmin/${id}`);
-      setUsers(users.filter(user => user.id !== id));
+      await axios.delete(
+        `https://backend-tienda-mac-production-0992.up.railway.app/deleteUserAdmin/${id}`
+      );
+      setUsers(users.filter((user) => user.id !== id));
     } catch (error) {
-      console.error('Error al eliminar el usuario:', error);
+      console.error("Error al eliminar el usuario:", error);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isUpdateMode) {
-      await axios.put(`https://backend-tienda-mac-production.up.railway.app/updateUserAdmin/${formData.id}`, formData);
+      await axios.put(
+        `https://backend-tienda-mac-production-0992.up.railway.app/updateUserAdmin/${formData.id}`,
+        formData
+      );
     } else {
-      const response = await axios.post('https://backend-tienda-mac-production.up.railway.app/userAdmin', formData);
+      const response = await axios.post(
+        "https://backend-tienda-mac-production-0992.up.railway.app/userAdmin",
+        formData
+      );
       setUsers([...users, response.data]);
     }
     setShowForm(false);
-    setFormData({ id: null, email: '', password: '', role: '' });
+    setFormData({ id: null, email: "", password: "", role: "" });
   };
 
   // Lógica de Paginación
@@ -71,17 +91,30 @@ const UserAdminManagement = () => {
         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 className="h2">Administrar Usuarios</h1>
-            <button className="btn btn-success" onClick={() => setShowForm(!showForm)}>
-              {showForm ? 'Cerrar Formulario' : <><FontAwesomeIcon icon={faPlus} /> Agregar Usuario</>}
+            <button
+              className="btn btn-success"
+              onClick={() => setShowForm(!showForm)}
+            >
+              {showForm ? (
+                "Cerrar Formulario"
+              ) : (
+                <>
+                  <FontAwesomeIcon icon={faPlus} /> Agregar Usuario
+                </>
+              )}
             </button>
           </div>
           {showForm && (
             <div className="card mb-3 shadow">
               <div className="card-body">
-                <h5 className="card-title">{isUpdateMode ? 'Editar Usuario' : 'Agregar Usuario'}</h5>
+                <h5 className="card-title">
+                  {isUpdateMode ? "Editar Usuario" : "Agregar Usuario"}
+                </h5>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email del Usuario</label>
+                    <label htmlFor="email" className="form-label">
+                      Email del Usuario
+                    </label>
                     <input
                       type="email"
                       name="email"
@@ -93,7 +126,9 @@ const UserAdminManagement = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Contraseña</label>
+                    <label htmlFor="password" className="form-label">
+                      Contraseña
+                    </label>
                     <input
                       type="password"
                       name="password"
@@ -105,7 +140,9 @@ const UserAdminManagement = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="role" className="form-label">Rol de Usuario</label>
+                    <label htmlFor="role" className="form-label">
+                      Rol de Usuario
+                    </label>
                     <input
                       type="text"
                       name="role"
@@ -117,7 +154,7 @@ const UserAdminManagement = () => {
                     />
                   </div>
                   <button type="submit" className="btn btn-primary">
-                    {isUpdateMode ? 'Actualizar' : 'Agregar'}
+                    {isUpdateMode ? "Actualizar" : "Agregar"}
                   </button>
                 </form>
               </div>
@@ -135,16 +172,22 @@ const UserAdminManagement = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentUsers.map(user => (
+                    {currentUsers.map((user) => (
                       <tr key={user.id}>
                         <td>{user.email}</td>
                         <td>{user.role}</td>
                         <td>
                           <div className="btn-group" role="group">
-                            <button className="btn btn-outline-primary btn-sm" onClick={() => handleEdit(user)}>
+                            <button
+                              className="btn btn-outline-primary btn-sm"
+                              onClick={() => handleEdit(user)}
+                            >
                               <FontAwesomeIcon icon={faEdit} />
                             </button>
-                            <button className="btn btn-outline-danger btn-sm" onClick={() => handleDelete(user.id)}>
+                            <button
+                              className="btn btn-outline-danger btn-sm"
+                              onClick={() => handleDelete(user.id)}
+                            >
                               <FontAwesomeIcon icon={faTrashAlt} />
                             </button>
                           </div>
@@ -157,12 +200,22 @@ const UserAdminManagement = () => {
             </div>
             <div className="card-footer bg-light">
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <small className="text-muted mb-2 mb-md-0">Página {currentPage} de {totalPages}</small>
+                <small className="text-muted mb-2 mb-md-0">
+                  Página {currentPage} de {totalPages}
+                </small>
                 <nav aria-label="User pagination">
                   <ul className="pagination pagination-sm m-0 justify-content-center">
-                    {[...Array(totalPages).keys()].map(page => (
-                      <li key={page} className={`page-item ${currentPage === page + 1 ? 'active' : ''}`}>
-                        <button className="page-link" onClick={() => paginate(page + 1)}>
+                    {[...Array(totalPages).keys()].map((page) => (
+                      <li
+                        key={page}
+                        className={`page-item ${
+                          currentPage === page + 1 ? "active" : ""
+                        }`}
+                      >
+                        <button
+                          className="page-link"
+                          onClick={() => paginate(page + 1)}
+                        >
                           {page + 1}
                         </button>
                       </li>

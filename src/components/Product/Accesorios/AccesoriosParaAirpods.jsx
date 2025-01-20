@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Navbar from '../../NavBar/NavBar';
-import Footer from '../../Footer/Footer'; 
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Navbar from "../../NavBar/NavBar";
+import Footer from "../../Footer/Footer";
+import { Link } from "react-router-dom";
 
 const AccesoriosParaAirpods = () => {
   const [iphoneProducts, setIphoneProducts] = useState([]);
@@ -11,32 +11,42 @@ const AccesoriosParaAirpods = () => {
   useEffect(() => {
     const fetchIphoneProducts = async () => {
       try {
-        const responses = await Promise.all([
-          
-        ]);
-        const products = responses.flatMap(response => response.data);
+        const responses = await Promise.all([]);
+        const products = responses.flatMap((response) => response.data);
         setIphoneProducts(products);
         products.forEach(async (product) => {
           try {
-            const imageResponse = await axios.get(`https://backend-tienda-mac-production.up.railway.app/products/${product.id}/images`);
+            const imageResponse = await axios.get(
+              `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+            );
             const imageFileNames = imageResponse.data;
-            const imageUrls = imageFileNames.map(fileName => `https://backend-tienda-mac-production.up.railway.app/images/${fileName}`);
-            setProductImages(prevState => ({ ...prevState, [product.id]: imageUrls }));
+            const imageUrls = imageFileNames.map(
+              (fileName) =>
+                `https://backend-tienda-mac-production-0992.up.railway.app/images/${fileName}`
+            );
+            setProductImages((prevState) => ({
+              ...prevState,
+              [product.id]: imageUrls,
+            }));
           } catch (error) {
-            console.error(`Error getting images for product ${product.id}:`, error);
+            console.error(
+              `Error getting images for product ${product.id}:`,
+              error
+            );
           }
         });
       } catch (error) {
-        console.error('Error fetching iPhone products:', error);
+        console.error("Error fetching iPhone products:", error);
       }
     };
     fetchIphoneProducts();
   }, []);
 
-
-
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(price);
+    return new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+    }).format(price);
   };
 
   return (
@@ -44,7 +54,9 @@ const AccesoriosParaAirpods = () => {
       <Navbar />
       <div className="container py-5">
         <h1 className="text-center mb-4 fs-4">Accesorios Para Airpods</h1>
-        <h2 className="text-center mb-4">Productos no disponibles en el momento</h2>
+        <h2 className="text-center mb-4">
+          Productos no disponibles en el momento
+        </h2>
         {/* Descomenta el siguiente bloque cuando los productos estén disponibles */}
         {/* <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {iphoneProducts.map((product) => (
@@ -77,5 +89,3 @@ const AccesoriosParaAirpods = () => {
 };
 
 export default AccesoriosParaAirpods;
-
-

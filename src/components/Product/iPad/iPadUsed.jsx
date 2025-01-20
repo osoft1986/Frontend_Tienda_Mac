@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Navbar from '../../NavBar/NavBar'; // Asegúrate de que la ruta sea correcta
-import Footer from '../../Footer/Footer';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Navbar from "../../NavBar/NavBar"; // Asegúrate de que la ruta sea correcta
+import Footer from "../../Footer/Footer";
 
 const IpadUsed = () => {
   const [IpadProducts, setIpadProducts] = useState([]);
@@ -10,40 +10,58 @@ const IpadUsed = () => {
   useEffect(() => {
     const fetchIpadProducts = async () => {
       try {
-        const response = await axios.get('https://backend-tienda-mac-production.up.railway.app/products/category/Smartphones/subcategory/Ipad/name/Ipad%20SE%20(3.ª generación)');
+        const response = await axios.get(
+          "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Smartphones/subcategory/Ipad/name/Ipad%20SE%20(3.ª generación)"
+        );
         const products = response.data;
         setIpadProducts(products);
 
         products.forEach(async (product) => {
           try {
-            const imageResponse = await axios.get(`https://backend-tienda-mac-production.up.railway.app/products/${product.id}/images`);
+            const imageResponse = await axios.get(
+              `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+            );
             const imageFileNames = imageResponse.data;
-            const imageUrls = imageFileNames.map(fileName => `https://backend-tienda-mac-production.up.railway.app/images/${fileName}`);
-            setProductImages(prevState => ({ ...prevState, [product.id]: imageUrls }));
+            const imageUrls = imageFileNames.map(
+              (fileName) =>
+                `https://backend-tienda-mac-production-0992.up.railway.app/images/${fileName}`
+            );
+            setProductImages((prevState) => ({
+              ...prevState,
+              [product.id]: imageUrls,
+            }));
           } catch (error) {
-            console.error(`Error getting images for product ${product.id}:`, error);
+            console.error(
+              `Error getting images for product ${product.id}:`,
+              error
+            );
           }
         });
       } catch (error) {
-        console.error('Error fetching Ipad products:', error);
+        console.error("Error fetching Ipad products:", error);
       }
     };
 
     fetchIpadProducts();
   }, []);
 
-
-
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(price);
+    return new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+    }).format(price);
   };
 
   return (
     <div className="AppleWatch-products">
       <Navbar />
       <div className="container py-5">
-        <h1 className="text-center mb-4 fs-4" style={{ color: 'black' }}>iPad Usados</h1>
-        <h2 className="text-center mb-4 fs-4" style={{ color: 'black' }}>Productos no disponibles en el momento</h2>
+        <h1 className="text-center mb-4 fs-4" style={{ color: "black" }}>
+          iPad Usados
+        </h1>
+        <h2 className="text-center mb-4 fs-4" style={{ color: "black" }}>
+          Productos no disponibles en el momento
+        </h2>
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {/* Ejemplo de producto */}
           {/* <div className="col">

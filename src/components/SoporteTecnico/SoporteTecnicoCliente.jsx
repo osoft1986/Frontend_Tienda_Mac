@@ -40,7 +40,7 @@ const SoporteTecnicoCliente = () => {
 
     try {
       const response = await axios.get(
-        "https://backend-tienda-mac-production.up.railway.app/soportetecnicocliente",
+        "https://backend-tienda-mac-production-0992.up.railway.app/soportetecnicocliente",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
