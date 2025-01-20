@@ -9,7 +9,7 @@ import "swiper/css/autoplay";
 
 // Crear una instancia de axios con configuración base
 const api = axios.create({
-  baseURL: "https://backend-tienda-mac-production-0992.up.railway.app",
+  baseURL: "https://back-endtiendamacandtiendam-production.up.railway.app",
 });
 
 const FeaturedProductsSection = () => {

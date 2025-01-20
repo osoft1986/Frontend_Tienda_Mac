@@ -30,7 +30,7 @@ const Product = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "https://backend-tienda-mac-production-0992.up.railway.app/product"
+        "https://back-endtiendamacandtiendam-production.up.railway.app/product"
       );
       setProducts(response.data);
     } catch (error) {
@@ -41,7 +41,7 @@ const Product = () => {
   const fetchProduct = async (productId) => {
     try {
       const response = await axios.get(
-        `https://backend-tienda-mac-production-0992.up.railway.app/product/${productId}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/product/${productId}`
       );
       setSelectedProduct(response.data);
     } catch (error) {
@@ -60,7 +60,7 @@ const Product = () => {
   const handleDeleteProduct = async (productId) => {
     try {
       await axios.delete(
-        `https://backend-tienda-mac-production-0992.up.railway.app/product/${productId}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/product/${productId}`
       );
       fetchProducts();
     } catch (error) {
@@ -71,7 +71,7 @@ const Product = () => {
   const handleAddProduct = async (formData) => {
     try {
       const response = await axios.post(
-        "https://backend-tienda-mac-production-0992.up.railway.app/product",
+        "https://back-endtiendamacandtiendam-production.up.railway.app/product",
         formData
       );
       if (response.status === 201) {

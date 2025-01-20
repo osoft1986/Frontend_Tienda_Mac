@@ -33,7 +33,7 @@ const UserPurchases = () => {
         const token = localStorage.getItem("token");
         if (!token) throw new Error("No se encontró el token en localStorage.");
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/auth/purchases",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/auth/purchases",
           {
             headers: { "x-auth-token": token },
           }
@@ -50,7 +50,7 @@ const UserPurchases = () => {
             date: new Date(purchase.createdAt),
             productName: product ? product.name : "No hay producto relacionado",
             imageUrl: imageName
-              ? `https://backend-tienda-mac-production-0992.up.railway.app/images/${imageName}`
+              ? `https://back-endtiendamacandtiendam-production.up.railway.app/images/${imageName}`
               : null,
           };
         });
@@ -68,7 +68,7 @@ const UserPurchases = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/auth/me",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/auth/me",
           {
             headers: { "x-auth-token": token },
           }

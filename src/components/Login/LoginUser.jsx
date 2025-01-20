@@ -41,7 +41,7 @@ const LoginUser = ({ onClose, onLoginSuccess }) => {
 
     try {
       const response = await axios.post(
-        "https://backend-tienda-mac-production-0992.up.railway.app/auth/LoginUser",
+        "https://back-endtiendamacandtiendam-production.up.railway.app/auth/LoginUser",
         {
           email,
           password,

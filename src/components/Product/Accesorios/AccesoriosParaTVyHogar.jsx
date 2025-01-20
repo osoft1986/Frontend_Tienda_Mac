@@ -13,13 +13,13 @@ const AccesoriosParaTVyHogar = () => {
       try {
         const responses = await Promise.all([
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20TV/subcategory/Controles%20remotos"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20TV/subcategory/Controles%20remotos"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20video/subcategory/Adaptador%20USB-C%20a%20HDMI"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20video/subcategory/Adaptador%20USB-C%20a%20HDMI"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Cables%20de%20Audio%20y%20Video/subcategory/Cable%20HD-HDMI"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Cables%20de%20Audio%20y%20Video/subcategory/Cable%20HD-HDMI"
           ),
         ]);
         const products = responses.flatMap((response) => response.data);
@@ -39,7 +39,7 @@ const AccesoriosParaTVyHogar = () => {
     const imageFetchPromises = products.map(async (product) => {
       try {
         const imageResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
         );
         const base64Images = imageResponse.data.map(
           (image) => `data:image/jpeg;base64,${image.data}`

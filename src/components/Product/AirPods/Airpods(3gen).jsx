@@ -14,10 +14,10 @@ const Airpods3gen = () => {
       try {
         const responses = await Promise.all([
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Audifonos/subcategory/Auriculares/name/AirPods%20(3ª%20generación)%20con%20estuche%20de%20carga%20inalámbrica"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Audifonos/subcategory/Auriculares/name/AirPods%20(3ª%20generación)%20con%20estuche%20de%20carga%20inalámbrica"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Audifonos/subcategory/Auriculares/name/AirPods%20(3.ª%20generación)%20con%20estuche%20de%20carga%20Lightning"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Audifonos/subcategory/Auriculares/name/AirPods%20(3.ª%20generación)%20con%20estuche%20de%20carga%20Lightning"
           ),
         ]);
 
@@ -38,7 +38,7 @@ const Airpods3gen = () => {
     const imageFetchPromises = products.map(async (product) => {
       try {
         const imageResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
         );
         const base64Images = imageResponse.data.map(
           (image) => `data:image/jpeg;base64,${image.data}`

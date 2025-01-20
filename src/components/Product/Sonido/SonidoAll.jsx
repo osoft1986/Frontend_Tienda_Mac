@@ -13,19 +13,19 @@ const SonidoAll = () => {
       try {
         const responses = await Promise.all([
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20audio/subcategory/Parlantes"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20audio/subcategory/Parlantes"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20audio/subcategory/Auriculares%20intraaurales%20de%20cable"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20audio/subcategory/Auriculares%20intraaurales%20de%20cable"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20audio/subcategory/Bocinas%20portátil"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20audio/subcategory/Bocinas%20portátil"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20audio/subcategory/Audífonos%20diademas"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20audio/subcategory/Audífonos%20diademas"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Parlantes/subcategory/Parlante%20Portátil"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Parlantes/subcategory/Parlante%20Portátil"
           ),
         ]);
 
@@ -46,7 +46,7 @@ const SonidoAll = () => {
     const imageFetchPromises = products.map(async (product) => {
       try {
         const imageResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
         );
         const base64Images = imageResponse.data.map(
           (image) => `data:image/jpeg;base64,${image.data}`

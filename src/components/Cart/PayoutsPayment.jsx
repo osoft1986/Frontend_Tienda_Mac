@@ -47,7 +47,7 @@ const PayoutsPayment = ({ totalAmount }) => {
       };
 
       const response = await axios.post(
-        "https://backend-tienda-mac-production-0992.up.railway.app/api/openpay/store-payment",
+        "https://back-endtiendamacandtiendam-production.up.railway.app/api/openpay/store-payment",
         paymentData
       );
 

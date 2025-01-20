@@ -19,7 +19,7 @@ const Categories = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/getAllCategories"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/getAllCategories"
         );
         setCategories(response.data);
       } catch (error) {
@@ -42,7 +42,7 @@ const Categories = () => {
     try {
       if (formData.editingCategoryId) {
         const response = await axios.put(
-          `https://backend-tienda-mac-production-0992.up.railway.app/updateCategory/${formData.editingCategoryId}`,
+          `https://back-endtiendamacandtiendam-production.up.railway.app/updateCategory/${formData.editingCategoryId}`,
           formData
         );
         setCategories(
@@ -53,7 +53,7 @@ const Categories = () => {
         alert("Categoría actualizada con éxito");
       } else {
         const response = await axios.post(
-          "https://backend-tienda-mac-production-0992.up.railway.app/createCategory",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/createCategory",
           formData
         );
         setCategories([...categories, response.data]);
@@ -85,7 +85,7 @@ const Categories = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://backend-tienda-mac-production-0992.up.railway.app/deleteCategory/${id}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/deleteCategory/${id}`
       );
       setCategories(categories.filter((cat) => cat.id !== id));
       alert("Categoría eliminada con éxito");

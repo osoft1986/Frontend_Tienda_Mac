@@ -36,7 +36,8 @@ import Navbar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const BASE_URL = "https://backend-tienda-mac-production-0992.up.railway.app";
+const BASE_URL =
+  "https://back-endtiendamacandtiendam-production.up.railway.app";
 
 const SoporteTecnicoClienteDetalle = () => {
   const { id } = useParams();

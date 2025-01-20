@@ -13,19 +13,19 @@ const AccesoriosParaWatch = () => {
       try {
         const responses = await Promise.all([
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20carga/subcategory/Soporte%20de%20viaje%20para%20el%20cable%20de%20carga%20y%20el%20%20Apple%20Watch"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20carga/subcategory/Soporte%20de%20viaje%20para%20el%20cable%20de%20carga%20y%20el%20%20Apple%20Watch"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20carga/subcategory/Base%20de%20carga%20para%20iPhone%20y%20apple%20watch"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20carga/subcategory/Base%20de%20carga%20para%20iPhone%20y%20apple%20watch"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20reloj/subcategory/Protector%20de%20pantalla%20para%20Apple%20Watch"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20reloj/subcategory/Protector%20de%20pantalla%20para%20Apple%20Watch"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20carga/subcategory/Bateria%20Portátil"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20carga/subcategory/Bateria%20Portátil"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Accesorios%20de%20carga/subcategory/Base%20de%20carga%202%20en%201%20para%20iPhone%20y%20Apple%20Watch"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Accesorios%20de%20carga/subcategory/Base%20de%20carga%202%20en%201%20para%20iPhone%20y%20Apple%20Watch"
           ),
         ]);
         const products = responses.flatMap((response) => response.data);
@@ -45,7 +45,7 @@ const AccesoriosParaWatch = () => {
     const imageFetchPromises = products.map(async (product) => {
       try {
         const imageResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
         );
         const base64Images = imageResponse.data.map(
           (image) => `data:image/jpeg;base64,${image.data}`

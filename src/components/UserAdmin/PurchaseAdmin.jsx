@@ -26,7 +26,7 @@ const PurchaseAdmin = () => {
     const fetchPurchases = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/adminpurchases"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/adminpurchases"
         );
         const purchasesWithImages = response.data.map((purchase) => {
           const product = purchase.Product;
@@ -39,7 +39,7 @@ const PurchaseAdmin = () => {
             date: new Date(purchase.createdAt),
             productName: product ? product.name : "No hay producto relacionado",
             imageUrl: imageName
-              ? `https://backend-tienda-mac-production-0992.up.railway.app/images/${imageName}`
+              ? `https://back-endtiendamacandtiendam-production.up.railway.app/images/${imageName}`
               : null,
             customerName: purchase.customer_name,
             customerEmail: purchase.customer_email,

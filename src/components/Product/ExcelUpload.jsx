@@ -22,7 +22,7 @@ const ExcelUpload = () => {
       formData.append("file", fileProducts);
       try {
         const response = await axios.post(
-          "https://backend-tienda-mac-production-0992.up.railway.app/postExcelProducts",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/postExcelProducts",
           formData,
           {
             headers: {
@@ -50,7 +50,7 @@ const ExcelUpload = () => {
       formData.append("file", fileImages);
       try {
         const response = await axios.post(
-          "https://backend-tienda-mac-production-0992.up.railway.app/postExcelImages",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/postExcelImages",
           formData,
           {
             headers: {

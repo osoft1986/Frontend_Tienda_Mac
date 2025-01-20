@@ -13,13 +13,13 @@ const IpadAir = () => {
       try {
         const responses = await Promise.all([
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Computación/subcategory/Tablets/name/iPad%20Air"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Computación/subcategory/Tablets/name/iPad%20Air"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Computación/subcategory/Tablets/name/iPad%20Air%20de%2011%20pulgadas%20M2"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Computación/subcategory/Tablets/name/iPad%20Air%20de%2011%20pulgadas%20M2"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Computación/subcategory/Tablets/name/iPad%20Air%20de%2013%20pulgadas%20M2"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Computación/subcategory/Tablets/name/iPad%20Air%20de%2013%20pulgadas%20M2"
           ),
         ]);
         const products = responses.flatMap((response) => response.data);
@@ -38,7 +38,7 @@ const IpadAir = () => {
     const imageFetchPromises = products.map(async (product) => {
       try {
         const imageResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
         );
         const base64Images = imageResponse.data.map(
           (image) => `data:image/jpeg;base64,${image.data}`

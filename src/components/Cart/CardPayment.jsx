@@ -82,7 +82,7 @@ const CardPayment = () => {
       };
 
       const response = await axios.post(
-        "https://backend-tienda-mac-production-0992.up.railway.app/api/openpay/create-charge",
+        "https://back-endtiendamacandtiendam-production.up.railway.app/api/openpay/create-charge",
         paymentData
       );
 
@@ -94,7 +94,7 @@ const CardPayment = () => {
         response.data.payment_method.url
       ) {
         await axios.post(
-          "https://backend-tienda-mac-production-0992.up.railway.app/update-quantity",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/update-quantity",
           { items: cartItems }
         );
         clearCart();

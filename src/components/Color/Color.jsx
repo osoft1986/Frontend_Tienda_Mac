@@ -19,7 +19,7 @@ const Color = () => {
     const fetchColors = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/colors"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/colors"
         );
         setColors(response.data);
       } catch (error) {
@@ -42,7 +42,7 @@ const Color = () => {
     try {
       if (formData.editingColorId) {
         const response = await axios.put(
-          `https://backend-tienda-mac-production-0992.up.railway.app/colors/${formData.editingColorId}`,
+          `https://back-endtiendamacandtiendam-production.up.railway.app/colors/${formData.editingColorId}`,
           formData
         );
         setColors(
@@ -53,7 +53,7 @@ const Color = () => {
         alert("Color actualizado con éxito");
       } else {
         const response = await axios.post(
-          "https://backend-tienda-mac-production-0992.up.railway.app/color",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/color",
           formData
         );
         setColors([...colors, response.data]);
@@ -83,7 +83,7 @@ const Color = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://backend-tienda-mac-production-0992.up.railway.app/colors/${id}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/colors/${id}`
       );
       setColors(colors.filter((color) => color.id !== id));
       alert("Color eliminado con éxito");

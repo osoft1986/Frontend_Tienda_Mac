@@ -13,7 +13,7 @@ const AirpodsUsed = () => {
       try {
         const responses = await Promise.all([
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Audifonos/subcategory/Auriculares/name/AirPods%20Pro%20(2.ª generación)%20con%20estuche%20MagSafe%20(USB-C)"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Audifonos/subcategory/Auriculares/name/AirPods%20Pro%20(2.ª generación)%20con%20estuche%20MagSafe%20(USB-C)"
           ),
         ]);
         const products = responses.flatMap((response) => response.data);
@@ -21,12 +21,12 @@ const AirpodsUsed = () => {
         products.forEach(async (product) => {
           try {
             const imageResponse = await axios.get(
-              `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+              `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
             );
             const imageFileNames = imageResponse.data;
             const imageUrls = imageFileNames.map(
               (fileName) =>
-                `https://backend-tienda-mac-production-0992.up.railway.app/images/${fileName}`
+                `https://back-endtiendamacandtiendam-production.up.railway.app/images/${fileName}`
             );
             setProductImages((prevState) => ({
               ...prevState,

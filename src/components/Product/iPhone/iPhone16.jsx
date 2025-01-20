@@ -13,10 +13,10 @@ const Iphone16 = () => {
       try {
         const responses = await Promise.all([
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Smartphones/subcategory/iPhone/name/iPhone%2016"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Smartphones/subcategory/iPhone/name/iPhone%2016"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Smartphones/subcategory/iPhone/name/iPhone%2016%20Plus"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Smartphones/subcategory/iPhone/name/iPhone%2016%20Plus"
           ),
         ]);
         const products = responses.flatMap((response) => response.data);
@@ -36,7 +36,7 @@ const Iphone16 = () => {
     const imageFetchPromises = products.map(async (product) => {
       try {
         const imageResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
         );
         const base64Images = imageResponse.data.map(
           (image) => `data:image/jpeg;base64,${image.data}`

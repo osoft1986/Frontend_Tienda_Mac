@@ -13,13 +13,13 @@ const MacbookPro = () => {
       try {
         const responses = await Promise.all([
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Computación/subcategory/MacBook/name/MacBook%20Pro%20de%2013%20pulgadas"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Computación/subcategory/MacBook/name/MacBook%20Pro%20de%2013%20pulgadas"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Computación/subcategory/MacBook/name/MacBook%20Pro%20de%2014%20pulgadas"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Computación/subcategory/MacBook/name/MacBook%20Pro%20de%2014%20pulgadas"
           ),
           axios.get(
-            "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Computación/subcategory/MacBook/name/MacBook%20Pro%20de%2016%20pulgadas"
+            "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Computación/subcategory/MacBook/name/MacBook%20Pro%20de%2016%20pulgadas"
           ),
         ]);
         const products = responses.flatMap((response) => response.data);
@@ -39,7 +39,7 @@ const MacbookPro = () => {
     const imageFetchPromises = products.map(async (product) => {
       try {
         const imageResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
         );
         const base64Images = imageResponse.data.map(
           (image) => `data:image/jpeg;base64,${image.data}`

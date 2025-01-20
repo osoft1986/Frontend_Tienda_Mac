@@ -42,7 +42,7 @@ const ProductForm = ({ onSubmit }) => {
   const fetchCategories = async () => {
     try {
       const response = await fetch(
-        "https://backend-tienda-mac-production-0992.up.railway.app/getAllCategories"
+        "https://back-endtiendamacandtiendam-production.up.railway.app/getAllCategories"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch categories");
@@ -58,7 +58,7 @@ const ProductForm = ({ onSubmit }) => {
   const fetchBrands = async () => {
     try {
       const response = await fetch(
-        "https://backend-tienda-mac-production-0992.up.railway.app/getAllBrands"
+        "https://back-endtiendamacandtiendam-production.up.railway.app/getAllBrands"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch brands");
@@ -74,7 +74,7 @@ const ProductForm = ({ onSubmit }) => {
   const fetchCapacities = async () => {
     try {
       const response = await fetch(
-        "https://backend-tienda-mac-production-0992.up.railway.app/getAllCapacities"
+        "https://back-endtiendamacandtiendam-production.up.railway.app/getAllCapacities"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch capacities");
@@ -90,7 +90,7 @@ const ProductForm = ({ onSubmit }) => {
   const fetchSubcategories = async () => {
     try {
       const response = await fetch(
-        "https://backend-tienda-mac-production-0992.up.railway.app/getAllSubcategories"
+        "https://back-endtiendamacandtiendam-production.up.railway.app/getAllSubcategories"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch subcategories");
@@ -106,7 +106,7 @@ const ProductForm = ({ onSubmit }) => {
   const fetchConditions = async () => {
     try {
       const response = await fetch(
-        "https://backend-tienda-mac-production-0992.up.railway.app/condition"
+        "https://back-endtiendamacandtiendam-production.up.railway.app/condition"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch conditions");
@@ -122,7 +122,7 @@ const ProductForm = ({ onSubmit }) => {
   const fetchColors = async () => {
     try {
       const response = await fetch(
-        "https://backend-tienda-mac-production-0992.up.railway.app/colors"
+        "https://back-endtiendamacandtiendam-production.up.railway.app/colors"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch colors");

@@ -35,7 +35,7 @@ const SearchComponent = ({ onClose }) => {
   const handleSearch = async (signal) => {
     try {
       const response = await axios.get(
-        `https://backend-tienda-mac-production-0992.up.railway.app/products/search?query=${searchTerm}`,
+        `https://back-endtiendamacandtiendam-production.up.railway.app/products/search?query=${searchTerm}`,
         { signal }
       );
       setSearchResults(response.data);
@@ -44,13 +44,13 @@ const SearchComponent = ({ onClose }) => {
       const imageRequests = response.data.map(async (product) => {
         try {
           const imageResponse = await axios.get(
-            `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`,
+            `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`,
             { signal }
           );
           const imageFileNames = imageResponse.data;
           const imageUrls = imageFileNames.map(
             (fileName) =>
-              `https://backend-tienda-mac-production-0992.up.railway.app/images/${fileName}`
+              `https://back-endtiendamacandtiendam-production.up.railway.app/images/${fileName}`
           );
           return { id: product.id, urls: imageUrls };
         } catch (error) {

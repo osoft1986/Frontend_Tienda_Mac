@@ -11,7 +11,7 @@ const IpadUsed = () => {
     const fetchIpadProducts = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Smartphones/subcategory/Ipad/name/Ipad%20SE%20(3.ª generación)"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Smartphones/subcategory/Ipad/name/Ipad%20SE%20(3.ª generación)"
         );
         const products = response.data;
         setIpadProducts(products);
@@ -19,12 +19,12 @@ const IpadUsed = () => {
         products.forEach(async (product) => {
           try {
             const imageResponse = await axios.get(
-              `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+              `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
             );
             const imageFileNames = imageResponse.data;
             const imageUrls = imageFileNames.map(
               (fileName) =>
-                `https://backend-tienda-mac-production-0992.up.railway.app/images/${fileName}`
+                `https://back-endtiendamacandtiendam-production.up.railway.app/images/${fileName}`
             );
             setProductImages((prevState) => ({
               ...prevState,

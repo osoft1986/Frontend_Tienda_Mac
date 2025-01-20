@@ -18,7 +18,7 @@ const Condition = () => {
     const fetchConditions = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/condition"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/condition"
         );
         setConditions(response.data);
       } catch (error) {
@@ -41,7 +41,7 @@ const Condition = () => {
     try {
       if (formData.editingConditionId) {
         const response = await axios.put(
-          `https://backend-tienda-mac-production-0992.up.railway.app/condition/${formData.editingConditionId}`,
+          `https://back-endtiendamacandtiendam-production.up.railway.app/condition/${formData.editingConditionId}`,
           formData
         );
         setConditions(
@@ -52,7 +52,7 @@ const Condition = () => {
         alert("Condición actualizada con éxito");
       } else {
         const response = await axios.post(
-          "https://backend-tienda-mac-production-0992.up.railway.app/condition",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/condition",
           formData
         );
         setConditions([...conditions, response.data]);
@@ -80,7 +80,7 @@ const Condition = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://backend-tienda-mac-production-0992.up.railway.app/condition/${id}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/condition/${id}`
       );
       setConditions(conditions.filter((cond) => cond.id !== id));
       alert("Condición eliminada con éxito");

@@ -12,7 +12,7 @@ const Airpods2gen = () => {
     const fetchAirpodsProducts = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Audifonos/subcategory/Auriculares/name/AirPods%20(2.ª%20generación)"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Audifonos/subcategory/Auriculares/name/AirPods%20(2.ª%20generación)"
         );
         const products = response.data;
         setAirpodsProducts(products);
@@ -31,7 +31,7 @@ const Airpods2gen = () => {
     const imageFetchPromises = products.map(async (product) => {
       try {
         const imageResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
         );
         const base64Images = imageResponse.data.map(
           (image) => `data:image/jpeg;base64,${image.data}`

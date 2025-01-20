@@ -22,7 +22,7 @@ const UserAdminManagement = () => {
     const getUsers = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/getAllUserAdmins"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/getAllUserAdmins"
         );
         setUsers(response.data);
       } catch (error) {
@@ -50,7 +50,7 @@ const UserAdminManagement = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://backend-tienda-mac-production-0992.up.railway.app/deleteUserAdmin/${id}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/deleteUserAdmin/${id}`
       );
       setUsers(users.filter((user) => user.id !== id));
     } catch (error) {
@@ -62,12 +62,12 @@ const UserAdminManagement = () => {
     e.preventDefault();
     if (isUpdateMode) {
       await axios.put(
-        `https://backend-tienda-mac-production-0992.up.railway.app/updateUserAdmin/${formData.id}`,
+        `https://back-endtiendamacandtiendam-production.up.railway.app/updateUserAdmin/${formData.id}`,
         formData
       );
     } else {
       const response = await axios.post(
-        "https://backend-tienda-mac-production-0992.up.railway.app/userAdmin",
+        "https://back-endtiendamacandtiendam-production.up.railway.app/userAdmin",
         formData
       );
       setUsers([...users, response.data]);

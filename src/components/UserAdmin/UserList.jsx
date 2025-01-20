@@ -24,7 +24,7 @@ const UsersList = () => {
     const getUsers = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/users"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/users"
         );
         if (Array.isArray(response.data.users)) {
           setUsers(response.data.users);
@@ -61,7 +61,7 @@ const UsersList = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://backend-tienda-mac-production-0992.up.railway.app/users/${id}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/users/${id}`
       );
       setUsers(users.filter((user) => user.id !== id));
     } catch (error) {
@@ -74,7 +74,7 @@ const UsersList = () => {
     try {
       if (isUpdateMode) {
         const response = await axios.put(
-          `https://backend-tienda-mac-production-0992.up.railway.app/users/${formData.id}`,
+          `https://back-endtiendamacandtiendam-production.up.railway.app/users/${formData.id}`,
           formData
         );
         setUsers(
@@ -84,7 +84,7 @@ const UsersList = () => {
         );
       } else {
         const response = await axios.post(
-          "https://backend-tienda-mac-production-0992.up.railway.app/users",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/users",
           formData
         );
         setUsers([...users, response.data.user]);

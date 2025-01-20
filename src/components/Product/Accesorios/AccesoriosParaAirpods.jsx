@@ -17,12 +17,12 @@ const AccesoriosParaAirpods = () => {
         products.forEach(async (product) => {
           try {
             const imageResponse = await axios.get(
-              `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+              `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
             );
             const imageFileNames = imageResponse.data;
             const imageUrls = imageFileNames.map(
               (fileName) =>
-                `https://backend-tienda-mac-production-0992.up.railway.app/images/${fileName}`
+                `https://back-endtiendamacandtiendam-production.up.railway.app/images/${fileName}`
             );
             setProductImages((prevState) => ({
               ...prevState,

@@ -25,7 +25,7 @@ const ProductUpdate = ({ productId, onClose }) => {
   const fetchProductData = async () => {
     try {
       const response = await axios.get(
-        `https://backend-tienda-mac-production-0992.up.railway.app/product/${productId}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/product/${productId}`
       );
       setProductData(response.data); // Suponiendo que la respuesta del backend es un objeto con los datos del producto
     } catch (error) {
@@ -45,7 +45,7 @@ const ProductUpdate = ({ productId, onClose }) => {
     e.preventDefault();
     try {
       await axios.put(
-        `https://backend-tienda-mac-production-0992.up.railway.app/product/${productId}`,
+        `https://back-endtiendamacandtiendam-production.up.railway.app/product/${productId}`,
         productData
       );
       onClose();

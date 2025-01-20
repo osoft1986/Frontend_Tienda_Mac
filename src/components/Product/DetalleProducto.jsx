@@ -27,12 +27,12 @@ const DetalleProducto = () => {
       setError(null);
       try {
         const productResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/product/${id}`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/product/${id}`
         );
         setProduct(productResponse.data);
 
         const imageResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/products/${id}/images`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/products/${id}/images`
         );
         // Convertir las imágenes a formato base64
         const base64Images = imageResponse.data.map(

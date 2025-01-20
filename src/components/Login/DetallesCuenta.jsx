@@ -36,7 +36,7 @@ const DetallesCuenta = () => {
         if (!token) throw new Error("No se encontró el token en localStorage.");
 
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/auth/me",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/auth/me",
           {
             headers: { "x-auth-token": token },
           }
@@ -65,7 +65,7 @@ const DetallesCuenta = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        "https://backend-tienda-mac-production-0992.up.railway.app/auth/me",
+        "https://back-endtiendamacandtiendam-production.up.railway.app/auth/me",
         formData,
         {
           headers: { "x-auth-token": token },

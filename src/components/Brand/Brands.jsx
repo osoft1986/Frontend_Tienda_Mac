@@ -20,7 +20,7 @@ const Brands = () => {
     const fetchBrands = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/getAllBrands"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/getAllBrands"
         );
         setBrands(response.data);
       } catch (error) {
@@ -42,8 +42,8 @@ const Brands = () => {
     e.preventDefault();
     const method = isUpdateMode ? "put" : "post";
     const url = isUpdateMode
-      ? `https://backend-tienda-mac-production-0992.up.railway.app/updateBrand/${formData.id}`
-      : "https://backend-tienda-mac-production-0992.up.railway.app/createBrand";
+      ? `https://back-endtiendamacandtiendam-production.up.railway.app/updateBrand/${formData.id}`
+      : "https://back-endtiendamacandtiendam-production.up.railway.app/createBrand";
 
     try {
       const response = await axios[method](url, formData);
@@ -81,7 +81,7 @@ const Brands = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://backend-tienda-mac-production-0992.up.railway.app/deleteBrand/${id}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/deleteBrand/${id}`
       );
       setBrands(brands.filter((brand) => brand.id !== id));
     } catch (error) {

@@ -20,7 +20,7 @@ const Capacity = () => {
     const fetchCapacities = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/getAllCapacities"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/getAllCapacities"
         );
         setCapacities(response.data);
       } catch (error) {
@@ -31,7 +31,7 @@ const Capacity = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/getAllCategories"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/getAllCategories"
         );
         setCategories(response.data);
       } catch (error) {
@@ -55,7 +55,7 @@ const Capacity = () => {
     try {
       if (formData.editingCapacityId) {
         await axios.put(
-          `https://backend-tienda-mac-production-0992.up.railway.app/updateCapacities/${formData.editingCapacityId}`,
+          `https://back-endtiendamacandtiendam-production.up.railway.app/updateCapacities/${formData.editingCapacityId}`,
           formData
         );
         setCapacities(
@@ -66,7 +66,7 @@ const Capacity = () => {
         alert("Capacidad actualizada con éxito");
       } else {
         const response = await axios.post(
-          "https://backend-tienda-mac-production-0992.up.railway.app/createCapacities",
+          "https://back-endtiendamacandtiendam-production.up.railway.app/createCapacities",
           formData
         );
         setCapacities([...capacities, response.data]);
@@ -95,7 +95,7 @@ const Capacity = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://backend-tienda-mac-production-0992.up.railway.app/deleteCapacities/${id}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/deleteCapacities/${id}`
       );
       setCapacities(capacities.filter((cap) => cap.id !== id));
       alert("Capacidad eliminada con éxito");

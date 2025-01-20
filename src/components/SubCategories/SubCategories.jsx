@@ -21,7 +21,7 @@ const Subcategories = () => {
     const fetchSubcategories = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/getAllSubcategories"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/getAllSubcategories"
         );
         setSubcategories(response.data);
       } catch (error) {
@@ -32,7 +32,7 @@ const Subcategories = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/getAllCategories"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/getAllCategories"
         );
         setCategories(response.data);
       } catch (error) {
@@ -55,8 +55,8 @@ const Subcategories = () => {
     e.preventDefault();
     const method = formData.editingSubcategoryId ? "put" : "post";
     const url = formData.editingSubcategoryId
-      ? `https://backend-tienda-mac-production-0992.up.railway.app/updateSubcategories/${formData.editingSubcategoryId}`
-      : "https://backend-tienda-mac-production-0992.up.railway.app/createSubcategories";
+      ? `https://back-endtiendamacandtiendam-production.up.railway.app/updateSubcategories/${formData.editingSubcategoryId}`
+      : "https://back-endtiendamacandtiendam-production.up.railway.app/createSubcategories";
 
     try {
       const response = await axios[method](url, formData);
@@ -102,7 +102,7 @@ const Subcategories = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://backend-tienda-mac-production-0992.up.railway.app/deleteSubcategories/${id}`
+        `https://back-endtiendamacandtiendam-production.up.railway.app/deleteSubcategories/${id}`
       );
       setSubcategories(subcategories.filter((sub) => sub.id !== id));
     } catch (error) {

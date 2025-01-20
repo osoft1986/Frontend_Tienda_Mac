@@ -27,7 +27,7 @@ const PaymentConfirmation = () => {
     const fetchPaymentDetails = async () => {
       try {
         const response = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/api/openpay/confirm-payment/${chargeId}`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/api/openpay/confirm-payment/${chargeId}`
         );
         setPaymentDetails(response.data);
       } catch (err) {

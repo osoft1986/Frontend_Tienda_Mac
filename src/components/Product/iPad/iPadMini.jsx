@@ -12,7 +12,7 @@ const IpadMini = () => {
     const fetchIpadProducts = async () => {
       try {
         const response = await axios.get(
-          "https://backend-tienda-mac-production-0992.up.railway.app/products/category/Computación/subcategory/Tablets/name/iPad%20mini%20Wi-Fi-%206.ª%20generación"
+          "https://back-endtiendamacandtiendam-production.up.railway.app/products/category/Computación/subcategory/Tablets/name/iPad%20mini%20Wi-Fi-%206.ª%20generación"
         );
         const products = response.data;
         setIpadProducts(products);
@@ -30,7 +30,7 @@ const IpadMini = () => {
     const imageFetchPromises = products.map(async (product) => {
       try {
         const imageResponse = await axios.get(
-          `https://backend-tienda-mac-production-0992.up.railway.app/products/${product.id}/images`
+          `https://back-endtiendamacandtiendam-production.up.railway.app/products/${product.id}/images`
         );
         const base64Images = imageResponse.data.map(
           (image) => `data:image/jpeg;base64,${image.data}`

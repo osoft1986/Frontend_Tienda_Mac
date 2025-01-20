@@ -10,7 +10,7 @@ function LoginAdmin({ onLogin }) {
   function handleSubmit(event) {
     event.preventDefault();
     fetch(
-      "https://backend-tienda-mac-production-0992.up.railway.app/validateUserAdmin",
+      "https://back-endtiendamacandtiendam-production.up.railway.app/validateUserAdmin",
       {
         method: "POST",
         headers: {
